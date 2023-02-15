@@ -1,3 +1,16 @@
-book_data
+# etc
 .DS_Store
 .python-version
+서점정보
+
+
+# crawler
+book_data
+crawling
+
+# backend
+secrets.json
+
+
+# frontend
+frontend

@@ -1,0 +1,2 @@
+2023-02-15 17:34:48,870 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2023-02-15 17:35:28,012 [INFO] django.utils.autoreload: /Users/jay/newgit/books/backend/config/settings.py changed, reloading.
