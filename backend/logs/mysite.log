@@ -1,2 +1,15 @@
 2023-02-15 17:34:48,870 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
 2023-02-15 17:35:28,012 [INFO] django.utils.autoreload: /Users/jay/newgit/books/backend/config/settings.py changed, reloading.
+2023-02-16 15:22:12,631 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2023-02-16 15:28:33,310 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2023-02-16 15:28:56,680 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2023-02-16 15:28:58,120 [WARNING] django.request: Not Found: /
+2023-02-16 15:28:58,206 [WARNING] django.request: Not Found: /favicon.ico
+2023-02-16 15:29:01,986 [WARNING] django.request: Not Found: /static/admin/css/base.css
+2023-02-16 15:29:01,989 [WARNING] django.request: Not Found: /static/admin/css/responsive.css
+2023-02-16 15:29:10,640 [WARNING] django.request: Not Found: /static/rest_framework/css/bootstrap.min.css
+2023-02-16 15:29:10,667 [WARNING] django.request: Not Found: /static/rest_framework/js/jquery-3.5.1.min.js
+2023-02-16 15:29:10,668 [WARNING] django.request: Not Found: /static/rest_framework/js/bootstrap.min.js
+2023-02-16 15:29:10,669 [WARNING] django.request: Not Found: /static/rest_framework/js/prettify-min.js
+2023-02-16 15:43:45,727 [INFO] django.utils.autoreload: /Users/jay/newgit/books/backend/config/settings.py changed, reloading.
+2023-02-16 15:43:45,978 [INFO] django.utils.autoreload: Watching for file changes with StatReloader

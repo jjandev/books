@@ -10,7 +10,11 @@ crawling
 
 # backend
 secrets.json
-
+db.sqlite3
+pinstall.sh
+1secrets.json
+temp.md
+backend/logs
 
 # frontend
 frontend

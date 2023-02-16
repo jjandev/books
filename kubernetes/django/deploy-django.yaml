@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-django
+  namespace: django
+  labels:
+    app: deploy-django
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  replicas: 3
+  selector:
+    matchLabels:
+      app: deploy-django
+  template:
+    metadata:
+      labels:
+        app: deploy-django
+    spec:
+      containers:
+      - image: ec9303/django:v1
+        name: mydjango
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: 1000m
+            memory: 1G
+          limits:
+            cpu: 1000m
+            memory: 1G
+        volumeMounts:
+        - name: django-log
+          mountPath: /var/log/django.log
+      volumes:
+      - name: django-log
+        hostPath:
+          path: /var/log/django.log
+          type: FileOrCreate
+  
