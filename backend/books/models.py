@@ -20,7 +20,7 @@ class Book(models.Model):
     title = models.CharField(max_length=128)
     # decs = models.CharField(max_length=100, blank=True)
     author = models.CharField(max_length=256)
-    publisher = models.CharField(max_length=256)
+    publisher = models.CharField(max_length=256, null=True)
     price = models.IntegerField(null=True)
     cover = models.TextField(null=True)
     toc = models.TextField(null=True)
@@ -42,12 +42,12 @@ class BookRank(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     rank = models.IntegerField()
     isbn = models.CharField(max_length=15, unique=True)
-    book_name = models.ForeignKey(Book, on_delete=models.CASCADE, to_field='isbn')
+    book_name = models.CharField(max_length=255)
     review_count = models.IntegerField()
     review_rating = models.DecimalField(max_digits=4, decimal_places=2)
     site = models.CharField(max_length=1)
     period = models.CharField(max_length=11)
-    rank_date = models.CharField(max_length=8)
+    rank_date = models.CharField(max_length=9)
     create_date = models.DateTimeField(null=True)
 
 

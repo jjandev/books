@@ -17,6 +17,5 @@ db.sqlite3
 temp.md
 backend/logs
 __pycache__
-
 # frontend
 frontend

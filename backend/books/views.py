@@ -51,7 +51,7 @@ class BookDetailView(APIView):
 class BookRankListView(APIView):
     def get(self, request):
         # /api/v1/ranks?categoryNumber=001&sellerId=Y&period=D&ymw=20230215
-        category_number = request.GET.get('categoryNumber', '001')
+        # category_number = request.GET.get('categoryNumber', '자기계발')
         site = request.GET.get('sellerId', 'Y') # 판매자 식별자 Y:yes24 / K:교보 / A:Aladin
         
         # 기본적으로 첫 화면은 Daily 어제날짜
@@ -69,7 +69,7 @@ class BookRankListView(APIView):
         elif period == 'Y': ymw = ymw[:4]
         elif period == 'W': ymw
         q=Q()
-        q &= Q(book__category_number=category_number)
+        # q &= Q(book__category=category_number)
         q &= Q(site=site)
         q &= Q(period=period)
         q &= Q(rank_date__exact=ymw)
