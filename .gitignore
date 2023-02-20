@@ -1,20 +1,22 @@
 # etc
 .DS_Store
 .python-version
-서점정보
+
 
 
 # crawler
 book_data
 crawling
+kyobo_data
+kyobe_categories.xlsx
 
 # backend
 secrets.json
 db.sqlite3
-pinstall.sh
 1secrets.json
 temp.md
 backend/logs
+__pycache__
 
 # frontend
 frontend

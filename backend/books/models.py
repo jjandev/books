@@ -1,5 +1,5 @@
 from django.db import models
-
+import uuid
 # Create your models here.
 class Book(models.Model):
     """
@@ -16,18 +16,19 @@ class Book(models.Model):
     - desc_detail  : 소개 이미지, 글
     - page_count   : 쪽수
     """
-    title = models.CharField(max_length=100)
-    decs = models.CharField(max_length=100, blank=True)
-    author = models.CharField(max_length=100)
-    publisher = models.CharField(max_length=100)
-    price = models.FloatField()
-    isbn = models.CharField(max_length=15, unique=True)
-    cover = models.TextField()
-    publish_date = models.DateField()
-    toc = models.TextField()
-    desc_detail = models.TextField()
-    page_count = models.IntegerField()
-    category_number = models.CharField(max_length=30)
+    isbn = models.CharField(max_length=15, primary_key=True)
+    title = models.CharField(max_length=128)
+    # decs = models.CharField(max_length=100, blank=True)
+    author = models.CharField(max_length=256)
+    publisher = models.CharField(max_length=256)
+    price = models.IntegerField(null=True)
+    cover = models.TextField(null=True)
+    toc = models.TextField(null=True)
+    category = models.CharField(max_length=64, null=True)
+    detail = models.TextField(null=True)
+    publish_date = models.DateField(null=True)
+    create_date = models.DateTimeField(null=True)
+
 
     def __str__(self):
         return f'{self.title}-{self.decs}'
@@ -38,15 +39,18 @@ class BookRank(models.Model):
     - rank : 베스트셀러 순위
     - title : 베스트셀러 책 제목
     """
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, to_field='isbn')
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     rank = models.IntegerField()
     isbn = models.CharField(max_length=15, unique=True)
-    site = models.CharField(max_length=4)
-    period = models.CharField(max_length=4)
-    create_date = models.DateField()
+    book_name = models.ForeignKey(Book, on_delete=models.CASCADE, to_field='isbn')
+    review_count = models.IntegerField()
+    review_rating = models.DecimalField(max_digits=4, decimal_places=2)
+    site = models.CharField(max_length=1)
+    period = models.CharField(max_length=11)
     rank_date = models.CharField(max_length=8)
+    create_date = models.DateTimeField(null=True)
+
 
     def __str__(self):
         return f'{self.book}-{self.rank}-{self.isbn}-{self.book.title}'
 
-    

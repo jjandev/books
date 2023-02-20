@@ -18,17 +18,19 @@ from django.core.exceptions import ImproperlyConfigured
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# with open(f"{BASE_DIR}/secrets.json") as f:
-#     secrets = json.loads(f.read())
+with open(f"{BASE_DIR}/secrets.json") as f:
+    secrets = json.loads(f.read())
 
-# def get_secret(setting, secrets=secrets):
-#     try:
-#         return secrets[setting]
-#     except KeyError:
-#         error_msg = f"Set the {setting} enviroment variable"
-#         raise ImproperlyConfigured(error_msg)
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = f"Set the {setting} enviroment variable"
+        raise ImproperlyConfigured(error_msg)
 
-# SECRET_KEY = get_secret("SECRET_KEY")
+SECRET_KEY = get_secret("SECRET_KEY")
+
+# SECRET_KEY = os.getenv('SECRET_KEY')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -91,16 +93,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-# DB_NAME = get_secret('DB_NAME')
-# DB_USERNAME = get_secret('DB_USERNAME')
-# DB_PASSWORD = get_secret('DB_PASSWORD')
-# DB_HOST = get_secret('DB_HOST')
-# DB_PORT = get_secret('DB_PORT')
-DB_NAME = os.getenv('DB_NAME')
-DB_USERNAME = os.getenv('DB_USERNAME')
-DB_PASSWORD = os.getenv('DB_PASSWORD')
-DB_HOST = os.getenv('DB_HOST')
-DB_PORT = os.getenv('DB_PORT')
+DB_NAME = get_secret('DB_NAME')
+DB_USERNAME = get_secret('DB_USERNAME')
+DB_PASSWORD = get_secret('DB_PASSWORD')
+DB_HOST = get_secret('DB_HOST')
+DB_PORT = get_secret('DB_PORT')
+
+# DB_NAME = os.getenv('DB_NAME')
+# DB_USERNAME = os.getenv('DB_USERNAME')
+# DB_PASSWORD = os.getenv('DB_PASSWORD')
+# DB_HOST = os.getenv('DB_HOST')
+# DB_PORT = os.getenv('DB_PORT')
 
 DATABASES = {
     # 'default': {
@@ -212,8 +215,8 @@ LOGGING = {
             'level': 'INFO',
             'filters': ['require_debug_false'],
             'class': 'logging.handlers.RotatingFileHandler',
-            # 'filename': BASE_DIR / 'logs/mysite.log',
-            'filename': '/var/log/django.log',
+            'filename': BASE_DIR / 'logs/mysite.log',
+            # 'filename': '/var/log/django.log',
             'maxBytes': 1024*1024*5,  # 5 MB
             'backupCount': 5,
             'formatter': 'standard',

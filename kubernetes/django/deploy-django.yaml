@@ -10,7 +10,7 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 1
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: deploy-django
@@ -20,10 +20,16 @@ spec:
         app: deploy-django
     spec:
       containers:
-      - image: ec9303/django:v1
+      - image: ec9303/django:v3
+        imagePullPolicy: Always
         name: mydjango
+        command: ["gunicorn", "--bind", "0.0.0.0:8080", "config.wsgi:application","--timeout", "120"]
+        # command: ["python3"]
         ports:
         - containerPort: 8080
+        envFrom:
+          - secretRef:
+              name: django-env
         resources:
           requests:
             cpu: 1000m
@@ -31,12 +37,14 @@ spec:
           limits:
             cpu: 1000m
             memory: 1G
-        volumeMounts:
-        - name: django-log
-          mountPath: /var/log/django.log
-      volumes:
-      - name: django-log
-        hostPath:
-          path: /var/log/django.log
-          type: FileOrCreate
+      #   volumeMounts:
+      #   - name: django-log
+      #     mountPath: /var/log/django.log
+      #     readOnly: true
+      # volumes:
+      # - name: django-log
+      #   emptyDir: {}
+        #hostPath:
+        #  path: /var/log/django.log
+        #  type: FileOrCreate
   
